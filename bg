@@ -1,0 +1,158 @@
+# Completing the CSS content
+css_content = """
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5; /* Light grey background */
+    color: #333; /* Dark grey text */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+header .logo {
+    width: 150px; /* Adjust the size as needed */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.hero {
+    position: relative;
+    background: url('hero-bg.jpg') no-repeat center center/cover; /* Full-width hero image */
+    color: white;
+    text-align: center;
+    padding: 150px 20px;
+}
+
+.hero .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    padding: 50px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.section {
+    margin: 20px 0;
+}
+
+.section h2 {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-left: 5px solid #333;
+    margin-bottom: 10px;
+}
+
+.section p {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav a {
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+    }
+}
+"""
+
+# Save HTML and CSS to files
+html_file_path = '/mnt/data/bumelas_website/index.html'
+css_file_path = '/mnt/data/bumelas_website/styles.css'
+with open(html_file_path, 'w') as html_file:
+    html_file.write(html_content)
+with open(css_file_path, 'w') as css_file:
+    css_file.write(css_content)
+
+# Save the logo and background image
+logo_path = '/mnt/data/bumelas_website/logo.png'
+background_image_path = '/mnt/data/bumelas_website/hero-bg.jpg'
+with open(logo_path, 'wb') as logo_file:
+    logo_file.write(logo_content)
+with open(background_image_path, 'wb') as background_image_file:
+    background_image_file.write(background_image_content)
+
+# Create a zip file of the website directory
+zip_file_path = '/mnt/data/bumelas_website.zip'
+with zipfile.ZipFile(zip_file_path, 'w') as zipf:
+    for root, dirs, files in os.walk('/mnt/data/bumelas_website'):
+        for file in files:
+            zipf.write(os.path.join(root, file), arcname=file)
+
+zip_file_path
